@@ -1,0 +1,22 @@
+{
+  "name": "brief",
+  "displayName": "Brief — Product Navigator",
+  "version": "1.0.0",
+  "description": "Brief is your Product Navigator — strategic product context, decision capture, and customer insight for AI coding agents.",
+  "author": {
+    "name": "Brief",
+    "email": "support@briefhq.ai"
+  },
+  "homepage": "https://briefhq.ai",
+  "repository": "https://github.com/brief-hq/brief-cursor-plugin",
+  "license": "ISC",
+  "keywords": [
+    "product-management",
+    "decisions",
+    "context",
+    "mcp",
+    "product-context",
+    "strategy"
+  ],
+  "logo": "assets/logo.png"
+}

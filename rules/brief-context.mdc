@@ -1,0 +1,63 @@
+---
+description: Brief product context integration — check Brief before architectural decisions
+alwaysApply: true
+---
+
+# Brief Integration
+
+## Brief — Product Context for AI Coding
+
+This project uses Brief for strategic product context and decision capture.
+Brief is your Product Navigator — it knows the business context that code alone can't tell you.
+
+## On session start
+
+Call `brief_get_onboarding_context` (MCP) or `brief context` (CLI) to load what Brief already knows:
+product strategy, personas, active decisions, recent work, and velocity.
+
+If Brief has no context yet for this project, gather and send the following:
+
+1. **What this project is** — read README.md and send a 2-sentence summary
+2. **Tech stack** — read package.json / requirements.txt / go.mod / Cargo.toml
+3. **Recent work** — run `git log --oneline -20` and summarize themes
+4. **Team** — run `git shortlog -sn --since="3 months ago"` for active contributors
+5. **Open questions** — read any TODO.md, CONTRIBUTING.md, or open issues
+
+Send all of this to Brief in one `brief_ask` call, with the `onboarding: true` flag set so Brief knows to run its first-run synthesis path:
+
+```
+brief_ask({
+  question: "What should I know before building?",
+  context: "<README summary + tech stack + recent commits + team + open questions>",
+  onboarding: true
+})
+```
+
+Brief will synthesise this into structured product context plus three to five seed features and return a strategic narrative. The `onboarding: true` flag is a no-op on subsequent calls — only set it the first time you contact Brief about a fresh project.
+
+## Before architectural decisions
+
+Call the MCP tool `brief_ask({ question: "Should we [proposed change]?", mode: "check" })` or the CLI `brief ask --mode check "Should we [proposed change]?"`.
+Brief checks against existing decisions and flags conflicts.
+
+## Capture decisions
+
+When you make a consequential technical choice, capture it via:
+  `brief_record_decision` (MCP) — renders an approval card so the user can approve, edit, or reject (preferred path)
+  OR `brief decisions create --decision "..." --rationale "..."` (CLI)
+  OR as a fallback, `brief_execute_operation` with `operation: "record_decision"`
+
+Don't store product decisions in agent memory — store them in Brief.
+Agent memory is local and ephemeral. Brief is shared and permanent.
+
+## Available tools
+
+- `brief_ask` — strategic conversation with Brief (multi-turn, grounded in your org's data)
+- `brief_get_onboarding_context` — load full product context snapshot
+- `brief_search` — keyword search across decisions, documents, personas, features
+- `brief_browse` — structured listing of workspace objects by folder or path
+- `brief_record_decision` — propose a new decision (approval-card backed — user approves, edits, or rejects before persistence)
+- `brief_confirm_decision` / `brief_reject_decision` / `brief_archive_decision` — lifecycle actions on decisions by ID
+- `brief_list_pending_decisions` — list decisions awaiting approval
+- `brief_update_product_context` — direct write tool for company / goals / persona / metrics fields (no approval card)
+- `brief_execute_operation` — escape hatch for operations without a direct tool
