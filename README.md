@@ -11,7 +11,7 @@ This repository is the Brief plugin for [Cursor](https://cursor.com/). Installin
 Paste this URL into your browser to install Brief's MCP server in Cursor:
 
 ```text
-cursor://anysphere.cursor-deeplink/mcp/install?name=brief&config=eyJ1cmwiOiJodHRwczovL2FwcC5icmllZmhxLmFpL21jcCIsInR5cGUiOiJodHRwIiwiaGVhZGVycyI6eyJBdXRob3JpemF0aW9uIjoiQmVhcmVyICR7QlJJRUZfQVBJX0tFWX0ifX0%3D
+cursor://anysphere.cursor-deeplink/mcp/install?name=brief&config=eyJ1cmwiOiJodHRwczovL2FwcC5icmllZmhxLmFpL21jcCIsInR5cGUiOiJodHRwIn0%3D
 ```
 
 This installs only the MCP server — no rules, skills, or commands. Use the marketplace install below if you want the full bundle.
@@ -27,21 +27,16 @@ Search for **Brief** in Cursor's marketplace (`Cmd/Ctrl + Shift + P → "Cursor:
 
 ## Authenticate
 
-After install, set `BRIEF_API_KEY` in your shell profile so the MCP server can authenticate:
+Cursor uses its native OAuth flow (DCR + PKCE + refresh, shipped in Cursor 2.5+) to authenticate with Brief. On first connect Cursor opens a browser to sign in; tokens refresh automatically after that — no shell env vars, no CLI token export.
 
-```bash
-npx @briefhq/cli@latest login                       # OAuth flow, stores creds in ~/.config/brief/
-export BRIEF_API_KEY=$(npx @briefhq/cli@latest token)  # add to ~/.zshrc or ~/.bashrc
-```
-
-Restart Cursor once. The Brief server will appear under **Cursor Settings → Tools & MCP**.
+The Brief server appears under **Cursor Settings → Tools & MCP**. If it ever shows "Logged out," click **Sign in** to re-trigger OAuth.
 
 ## Contents
 
 | Path | Purpose |
 |---|---|
 | `.cursor-plugin/plugin.json` | Cursor marketplace manifest |
-| `mcp.json` | MCP server endpoint + auth header |
+| `mcp.json` | MCP server endpoint (OAuth handled natively by Cursor) |
 | `rules/brief-context.mdc` | Always-applied project rule |
 | `skills/brief/SKILL.md` | Brief CLI reference skill |
 | `commands/brief-ask.md` | `/brief-ask` slash command |

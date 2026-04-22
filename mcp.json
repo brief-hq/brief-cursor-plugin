@@ -2,10 +2,7 @@
   "mcpServers": {
     "brief": {
       "url": "https://app.briefhq.ai/mcp",
-      "type": "http",
-      "headers": {
-        "Authorization": "Bearer ${BRIEF_API_KEY}"
-      }
+      "type": "http"
     }
   }
 }

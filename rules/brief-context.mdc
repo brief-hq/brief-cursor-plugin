@@ -3,6 +3,8 @@ description: Brief product context integration — check Brief before architectu
 alwaysApply: true
 ---
 
+<!-- always-apply: orientation context so Cursor knows Brief exists and when to consult it; not turn-by-turn instructions -->
+
 # Brief Integration
 
 ## Brief — Product Context for AI Coding
