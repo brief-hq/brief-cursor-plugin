@@ -37,6 +37,8 @@ brief_ask({
 
 Brief will synthesise this into structured product context plus three to five seed features and return a strategic narrative. The `onboarding: true` flag is a no-op on subsequent calls — only set it the first time you contact Brief about a fresh project.
 
+Later `brief_ask` calls continue this MCP coding-session conversation by default. Pass `new_conversation: true` to start fresh or `conversation_id` for a one-off override. Fast mode is stateless.
+
 ## Before architectural decisions
 
 Call the MCP tool `brief_ask({ question: "Should we [proposed change]?", mode: "check" })` or the CLI `brief ask --mode check "Should we [proposed change]?"`.
@@ -48,6 +50,8 @@ When you make a consequential technical choice, capture it via:
   `brief_record_decision` (MCP) — renders an approval card so the user can approve, edit, or reject (preferred path)
   OR `brief decisions create --decision "..." --rationale "..."` (CLI)
   OR as a fallback, `brief_execute_operation` with `operation: "record_decision"`
+
+If the decision should stay within the coding session, use the `coding_session_key` returned by `brief_ask` as `isolation_key`. For another temporary scope, pass `--isolation <key>` (or `isolation_key` to MCP) with its identifier. Use the same key on reads. Promote later with `brief decisions promote <id>`.
 
 Don't store product decisions in agent memory — store them in Brief.
 Agent memory is local and ephemeral. Brief is shared and permanent.
