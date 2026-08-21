@@ -65,5 +65,5 @@ Agent memory is local and ephemeral. Brief is shared and permanent.
 - `brief_record_decision` — propose a new decision (approval-card backed — user approves, edits, or rejects before persistence)
 - `brief_confirm_decision` / `brief_reject_decision` / `brief_archive_decision` — lifecycle actions on decisions by ID
 - `brief_list_pending_decisions` — list decisions awaiting approval
-- `brief_update_product_context` — direct write tool for company / goals / persona / metrics fields (no approval card)
+- `brief_update_product_context` — direct write tool for productAddress / company / goals / persona / metrics fields (no approval card)
 - `brief_execute_operation` — escape hatch for operations without a direct tool
