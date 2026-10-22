@@ -46,10 +46,15 @@ Brief checks against existing decisions and flags conflicts.
 
 ## Capture decisions
 
-When you make a consequential technical choice, capture it via:
+When you make a consequential technical choice yourself, record it via:
   `brief_record_decision` (MCP) — renders an approval card so the user can approve, edit, or reject (preferred path)
   OR `brief decisions create --decision "..." --rationale "..."` (CLI)
-  OR as a fallback, `brief_execute_operation` with `operation: "record_decision"`
+
+When a decision needs someone else's sign-off, or isn't settled yet, propose it instead — never record it as confirmed and phrase it as a question:
+  `brief_propose_decision` (MCP) — writes a pending proposal directly, no card required
+  OR `brief decisions propose --decision "..." --rationale "..." --assignee <email>` (CLI)
+
+Example: asked to "get sign-off from Drew on using JWT for auth," call `brief_propose_decision`, not `brief_record_decision`. If multiple people must sign off, propose once per approver.
 
 If the decision should stay within the coding session, use the `coding_session_key` returned by `brief_ask` as `isolation_key`. For another temporary scope, pass `--isolation <key>` (or `isolation_key` to MCP) with its identifier. Use the same key on reads. Promote later with `brief decisions promote <id>`.
 
@@ -62,7 +67,8 @@ Agent memory is local and ephemeral. Brief is shared and permanent.
 - `brief_get_onboarding_context` — load full product context snapshot
 - `brief_search` — keyword search across decisions, documents, personas, features
 - `brief_browse` — structured listing of workspace objects by folder or path
-- `brief_record_decision` — propose a new decision (approval-card backed — user approves, edits, or rejects before persistence)
+- `brief_record_decision` — record a decision now, approval-card backed (user approves, edits, or rejects before persistence); only proposes via `status: 'pending'` on hosts that render cards
+- `brief_propose_decision` — create a pending decision proposal directly, no card required. Use when a decision needs someone else's sign-off or isn't settled yet
 - `brief_confirm_decision` / `brief_reject_decision` / `brief_archive_decision` — lifecycle actions on decisions by ID
 - `brief_list_pending_decisions` — list decisions awaiting approval
 - `brief_update_product_context` — direct write tool for productAddress / company / goals / persona / metrics fields (no approval card)

@@ -35,9 +35,11 @@ For sub-2-second context checks mid-build, use `mode: "fast"`.
 
 ## Capture decisions
 
-When a consequential choice is made, record it via `brief_record_decision` with the decision and rationale. Brief renders a decision approval card so the user can approve, edit, or reject before it is persisted — this is the preferred path.
+When a consequential choice is made and the user is making it right now, record it via `brief_record_decision` with the decision and rationale. Brief renders a decision approval card so the user can approve, edit, or reject before it is persisted — this is the preferred path for a decision the user is confirming themselves. (It also supports `status: 'pending'` for proposing to someone else, but only on hosts that render that card — on other hosts it writes nothing.)
 
-For rare batch or escape-hatch writes, fall back to `brief_execute_operation` with `operation: "record_decision"`.
+When a decision needs **someone else's** sign-off, or isn't settled yet, use `brief_propose_decision` instead — it writes a pending proposal immediately, no card required, on any host. **Never record an unsettled decision as confirmed and phrase it as a question instead — propose it.** If multiple people must sign off, propose once per approver.
+
+Example: asked to "get sign-off from Drew on using JWT for auth," call `brief_propose_decision({ decision: "Use JWT for auth", rationale: "...", assigned_to_email: "drew@example.com" })` — not `brief_record_decision`.
 
 Do not store product decisions in conversation memory. Conversation memory is local and ephemeral; Brief is shared and permanent.
 
@@ -63,7 +65,8 @@ Call `brief_update_product_context` to write the product address, company, goals
 | `brief_ask` | Strategic reasoning, multi-turn, grounded in your org's data. Modes: `check`, `advise`, `fast`. |
 | `brief_search` | Keyword search across decisions, documents, personas, features, signals. Filter with `types`. |
 | `brief_browse` | Structured listings of workspace objects. |
-| `brief_record_decision` | Capture a decision with rationale — renders an approval card. |
+| `brief_record_decision` | Record a decision now with rationale — renders an approval card; only proposes via `status: 'pending'` on hosts that render it. |
+| `brief_propose_decision` | Create a pending decision proposal directly, no card required. Use when sign-off is needed from someone else or the decision isn't settled. |
 | `brief_confirm_decision` / `brief_reject_decision` / `brief_archive_decision` | Lifecycle actions on decisions. |
 | `brief_list_pending_decisions` | Decisions awaiting approval. |
 | `brief_update_product_context` | Write the product address, company, goals, or persona fields. |
@@ -82,6 +85,7 @@ Use this only when the Brief MCP server is unavailable. Discover the complete sh
 brief decisions search "<query>" --offset 0 --isolation <key> --json
 brief decisions get <decision-id> --isolation <key> --json
 brief decisions create --decision "..." --rationale "..." --expires-when "..." --isolation <key> --json
+brief decisions propose --decision "..." --rationale "..." --assignee <email> --json
 brief signals list --order-by created_at --order desc --json
 brief conversations list --cursor <cursor> --source agent --json
 brief docs list --page 1 --json
