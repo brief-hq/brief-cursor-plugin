@@ -49,7 +49,7 @@ Brief checks against existing decisions and flags conflicts.
 Before recording or proposing, read and apply [the decision standard](../skills/brief/SKILL.md#decision-standard). Session isolation does not make ticket notes eligible decisions.
 
 When the current user is making or explicitly confirming a settled choice that meets the standard, record it with that authorization via:
-  `brief_record_decision` (MCP) — renders an approval card so the user can approve, edit, or reject (preferred path)
+  `brief_record_decision` (MCP) — preferred on hosts that render its approval card; otherwise use `brief_propose_decision` to save a pending proposal for review
   OR `brief decisions create --decision "..." --rationale "..."` (CLI; records as confirmed immediately, with no approval card, so requires current-user authorization)
 
 When a lasting choice needs someone else's sign-off or is not settled yet, propose it as a declarative statement for review:
