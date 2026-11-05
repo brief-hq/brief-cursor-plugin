@@ -78,4 +78,5 @@ Agent memory is local and ephemeral. Brief is shared and permanent.
 - `brief_confirm_decision` / `brief_reject_decision` / `brief_archive_decision` — lifecycle actions on decisions by ID; `confirm`/`reject` also accept a pending decision suggestion's uuid (BRI-8111) — approving one still requires a signed-in web session or a verified Slack/Teams turn, so confirm on a uuid always errors with a pointer to /decisions
 - `brief_list_pending_decisions` — list decisions awaiting approval AND pending decision suggestions, each tagged `source`
 - `brief_update_product_context` — direct write tool for productAddress / company / goals / persona / metrics fields (no approval card)
-- `brief_execute_operation` — escape hatch for operations without a direct tool
+- `brief_read_operation` — reads without a dedicated tool
+- `brief_write_operation` — writes without a dedicated tool
