@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 — 2026-11-08
+
+- BRI-9091: Update Brief Labs Inc. branding, product strategy positioning, and public links; distinguish MCP deep-link setup from full-bundle local testing while marketplace review is pending.
+
 ## 1.0.1 — 2026-11-04
 
 - BRI-2576: Route named workspace reads and writes through separate MCP tools.
