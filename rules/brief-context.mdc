@@ -62,7 +62,7 @@ When a lasting choice needs someone else's sign-off or is not settled yet, propo
 
 Example: asked to "get sign-off from Drew on offering a free plan," call `brief_propose_decision`, not `brief_record_decision`. If multiple people must sign off, propose once per approver.
 
-If the decision should stay within the coding session, use the `coding_session_key` returned by `brief_ask` as `isolation_key`. For another temporary scope, pass `--isolation <key>` (or `isolation_key` to MCP) with its identifier. Use the same key on reads. Promote later with `brief decisions promote <id>`.
+If the decision should stay within the coding session, use the `coding_session_key` returned by `brief_ask` as `isolation_key`. For another temporary scope, pass `--isolation <key>` (or `isolation_key` to MCP) with its identifier. Use the same key on reads. Promote later with `brief decisions promote <id> --isolation <key>`.
 
 Don't store product decisions in agent memory — store them in Brief.
 Agent memory is local and ephemeral. Brief is shared and permanent.
