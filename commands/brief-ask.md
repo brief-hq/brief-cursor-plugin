@@ -1,12 +1,14 @@
 # Brief Ask
 
-Ask Brief a product question. Brief is your Product Navigator — it knows business context that code alone can't tell you.
+Ask Brief a product question. Brief is a product strategy agent that answers from the workspace's decisions, personas, strategy, customers, and competitive landscape.
 
 ## Usage
 
 `/brief-ask <question>`
 
 Calls continue the current MCP coding-session conversation by default. Start fresh with `new_conversation: true`, or pass an explicit `conversation_id` as a one-off override that leaves the default in place; fast mode is stateless.
+
+Summarize the returned recommendation and rationale, then finish. Do not save product guidance to local conversation memory.
 
 ## Examples
 

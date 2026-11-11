@@ -36,6 +36,17 @@ The bundle contains:
 - `skills/brief/` — the Brief MCP reference skill, auto-invoked when a task matches its description
 - `commands/brief-onboard.md` and `commands/brief-ask.md` — `/brief-onboard` and `/brief-ask` slash commands
 
+## What Brief does
+
+- Load product strategy, personas, decisions, customers, and competitive context.
+- Ask for recommendations or check a proposed direction against workspace decisions.
+- Search workspace knowledge and record decisions with the user's authorization.
+- Change workspace data and connected integrations when the user requests it.
+
+Brief needs a Brief account and acts within your permissions in the workspace you authorize. It does not edit or run code in your local repository.
+
+Use `/brief-onboard` to load context and `/brief-ask <question>` to ask a product question. The MCP server advertises its tools when Cursor connects; the bundled skill describes when to use them.
+
 ## Authenticate
 
 Cursor uses its native OAuth flow (DCR + PKCE + refresh, shipped in Cursor 2.5+) to authenticate with Brief. On first connect Cursor opens a browser to sign in; tokens refresh automatically after that — no shell env vars, no CLI token export.
