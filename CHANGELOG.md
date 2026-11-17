@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 — 2026-11-17
+
+- BRI-9721: Stop collecting and uploading repository data at session start or when Brief has no context. `/brief-onboard` now shows a bounded project summary (README, tech stack, recent-work themes; no contributors or issues) and sends it only after the user confirms.
+- Write product context and other Brief data only for work the user requested or approved; no silent inferred updates. `brief_ask` questions are unchanged.
+
 ## 1.0.3 — 2026-11-10
 
 - Update the rule, skill, and commands to current Brief product strategy wording.

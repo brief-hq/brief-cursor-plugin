@@ -45,7 +45,7 @@ The bundle contains:
 
 Brief needs a Brief account and acts within your permissions in the workspace you authorize. It does not edit or run code in your local repository.
 
-Use `/brief-onboard` to load context and `/brief-ask <question>` to ask a product question. The MCP server advertises its tools when Cursor connects; the bundled skill describes when to use them.
+Use `/brief-onboard` to load context; if Brief has none for the project, it shows you a short project summary and sends it only after you confirm. Use `/brief-ask <question>` to ask a product question. The MCP server advertises its tools when Cursor connects; the bundled skill describes when to use them.
 
 ## Authenticate
 

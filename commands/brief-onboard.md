@@ -1,6 +1,6 @@
 # Brief Onboard
 
-Load Brief product context for this project.
+Load Brief product context for this project. If Brief has none yet, send it a short project summary that the user has seen and confirmed.
 
 ## Steps
 
@@ -8,17 +8,19 @@ Load Brief product context for this project.
    to load what Brief already knows about this project — product strategy,
    personas, active decisions, recent work, and velocity.
 
-2. If Brief has no context yet, gather:
-   - **What this project is** — read README.md, write a 2-sentence summary
-   - **Tech stack** — check package.json / requirements.txt / go.mod / Cargo.toml
-   - **Recent work** — `git log --oneline -20` and summarize themes
-   - **Team** — `git shortlog -sn --since="3 months ago"`
-   - **Open questions** — TODO.md, CONTRIBUTING.md, open issues
+2. If Brief already has context for this project, summarize it for the user and stop. Send nothing.
 
-   Send all of this to Brief in one call:
-   `brief_ask({ question: "What should I know before building?", context: "[context]", onboarding: true })`
+3. If Brief has no context yet, draft a short summary from these local sources only:
+   - **What this project is** — a 2-sentence summary of README.md
+   - **Tech stack** — languages and main frameworks from package.json / requirements.txt / go.mod / Cargo.toml
+   - **Recent work** — 3 to 5 themes from `git log --oneline -20`, without commit hashes, author names, or email addresses
 
-3. Brief will respond with product context and its first insight.
+   Do not include contributor lists, issue contents, secrets, environment files, or source code.
+
+4. Show the user the exact summary and explain that Brief will use it to create product context and seed features in their workspace. Send it only after the user confirms:
+   `brief_ask({ question: "What should I know before building?", context: "[confirmed summary]", onboarding: true })`
+
+5. Brief will respond with product context and its first insight.
 
 ## Usage
 
